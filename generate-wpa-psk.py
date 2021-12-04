@@ -7,12 +7,12 @@ try:
     import binascii
 
 except ImportError:
-	print('error importing modules')
-    print('please install argparse hashlib binascii sys via pip3')
-	exit(1)
+    print('error importing modules')
+    print('please install argparse sys hashlib binascii via pip3 install')
+    exit(1)
 
 class GeneratePSK():
-    #calculates a WPA PSK based on the passphrase and the SSID 
+#calculates a WPA PSK based on the passphrase and the SSID 
 
     def parse_args(self):
         parser = argparse.ArgumentParser(description="Generate WPA PSK",conflict_handler='resolve')
