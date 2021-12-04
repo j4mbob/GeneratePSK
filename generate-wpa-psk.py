@@ -8,6 +8,7 @@ try:
 
 except ImportError:
 	print('error importing modules')
+    print('please install argparse hashlib binascii sys via pip3')
 	exit(1)
 
 class GeneratePSK():
@@ -25,7 +26,7 @@ class GeneratePSK():
         print('SSID:' + ' ' + ssid)
         print('PASSPHRASE:' + ' ' + passphrase)
         dk = hashlib.pbkdf2_hmac('sha1', str.encode(passphrase), str.encode(ssid), 4096, 32)
-        print('CALCULATED PSK:' + ' ' + binascii.hexlify(dk).decode("UTF-8"))
+        print('CALCULATED PSK:' + ' ' + '0x00' + binascii.hexlify(dk).decode("UTF-8"))
 
 if __name__ == "__main__":
     g = GeneratePSK()
