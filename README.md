@@ -1,3 +1,1 @@
-# calculate-wpa-psk
-# calculate-wpa-psk
-# calculate-wpa-psk
+Calculates a WPA PSK based on a given SSID and plaintext passphrase
