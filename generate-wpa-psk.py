@@ -18,15 +18,23 @@ class GeneratePSK():
         parser = argparse.ArgumentParser(description="Generate WPA PSK",conflict_handler='resolve')
         parser.add_argument('ssid', help='<ssid>')
         parser.add_argument('passphrase', help='<passphrase>')
+        parser.add_argument('--silent', action='store_true', required=False, help='Just output calculated PSK')
         parseargs = vars(parser.parse_args(None if sys.argv[1:] else ['-h']))
+
+        if parseargs['silent']:
+            self.silent = True
 
         return parseargs['ssid'],parseargs['passphrase']
 
     def generate(self,ssid,passphrase):
-        print('SSID:' + ' ' + ssid)
-        print('PASSPHRASE:' + ' ' + passphrase)
         dk = hashlib.pbkdf2_hmac('sha1', str.encode(passphrase), str.encode(ssid), 4096, 32)
-        print('CALCULATED PSK:' + ' ' + '0x00' + binascii.hexlify(dk).decode("UTF-8"))
+
+        if hasattr(self, 'silent'):
+            print('0x00' + binascii.hexlify(dk).decode("UTF-8"))    
+        else:
+            print('SSID:' + ' ' + ssid)
+            print('PASSPHRASE:' + ' ' + passphrase)
+            print('CALCULATED PSK:' + ' ' + '0x00' + binascii.hexlify(dk).decode("UTF-8"))
 
 if __name__ == "__main__":
     g = GeneratePSK()
